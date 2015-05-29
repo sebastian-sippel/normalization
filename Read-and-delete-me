@@ -6,4 +6,4 @@
 * Run R CMD build to build the package tarball.
 * Run R CMD check to check the package tarball.
 
-Read "Writing R Extensions" for more information.
+Read "Writing R Extensions" for more information. # This is only a test.
