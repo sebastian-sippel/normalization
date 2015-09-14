@@ -21,6 +21,9 @@
 
 # R-packages required:
 require(spectral.methods)   # Singular-Spectrum Analysis to remove trends
+require(devtools)
+
+install_github(repo="sebastian-sippel/normalization/normalization")
 library(normalization)
 
 
@@ -37,7 +40,7 @@ data.cube.original = array(data=rnorm(n=xdim*ydim*tdim, mean=0, sd=1), dim=c(xdi
 # ALTERNATIVE: Load your own data!
 
 # ----------------------------------------------------------------------------
-# 2. Estimate trend components per grid cell:
+# 2. Estimate trend components per grid cell: (not necessary if no trend!!)
 # ----------------------------------------------------------------------------
 # estimate trend components using SSA (or any other method): 
 data.cube.trend = apply(X=data.cube.original, MARGIN=c(1,2), FUN=SSA.detrend, borders.wl=list(c(31,Inf)), M=45, n.comp=6)
@@ -48,8 +51,8 @@ data.cube.trend = aperm(a=data.cube.trend, perm=c(2,3,1))
 # ---------------------------------------------------------------------------
 # 3. normalization of the data cube and correction:
 # ---------------------------------------------------------------------------
-# normalize each grid cell based on a reference period and apply correction in one function:
-data.cube.norm = normalize.spatiotemporal.cube(data=data.cube.original, data.trend=data.cube.trend, SUBTRENDSD=F, TRENDCOR=F, ref.idx = c(1:30))
+# normalize each grid cell based on a reference period and apply correction in one function NO TRENDCOR:
+data.cube.norm = normalize.spatiotemporal.cube(data=data.cube.original, data.trend=NA, SUBTRENDSD=F, TRENDCOR=F, ref.idx = c(1:30))
 
 # INPUT
 # data: 3-dimensional array of the form longiutde-latitude-time

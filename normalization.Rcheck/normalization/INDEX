@@ -1,0 +1,5 @@
+SSA.detrend             A function to estimate nonlinear trends
+linear.detrend          A function to estimate linear trends
+normalize.spatiotemporal.cube
+                        A function to normalize a spatio-temporal data
+                        cube
